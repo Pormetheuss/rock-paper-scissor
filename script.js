@@ -15,40 +15,79 @@ function getComputerChoice()
     }
 }   
 
+let result = document.querySelector(".store")
+
+let pwin = 0;
+let cwin = 0;
+let player = document.querySelector(".player");
+let computer = document.querySelector(".computer")
+let winner = document.querySelector(".winner");
+let over = 0;
+
+
 function playRound(playerSelection, computerSelection){
     if (playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "SCISSOR"){
-        return "You win! Rock beats Scissor.";
+        result.innerText = "You win! Rock beats Scissor.";
+        pwin ++;
+        player.innerText = "Player score: "+pwin;
+        computer.innerText = "Computer score: "+cwin;
     }
     else if (playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "PAPER"){
-        return "You lose! Paper beats Rock.";
+        result.innerText = "You lose! Paper beats Rock.";
+        cwin ++;
+        player.innerText = "Player score: "+pwin;
+        computer.innerText = "Computer score: "+cwin;
     }
     else if(playerSelection.toUpperCase() === "ROCK" && computerSelection.toUpperCase() === "ROCK"){
-        return "It's a draw! You both picked Rock."
+        result.innerText = "It's a draw! You both picked Rock."
     }
     else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "SCISSOR"){
-        return "You lose! Scissor beats Paper.";
+        result.innerText = "You lose! Scissor beats Paper.";
+        cwin ++;
+        player.innerText = "Player score: "+pwin;
+        computer.innerText = "Computer score: "+cwin;
     }
     else if (playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "PAPER"){
-        return "It's a draw! You both picked Paper.";
+        result.innerText = "It's a draw! You both picked Paper.";
     }
     else if(playerSelection.toUpperCase() === "PAPER" && computerSelection.toUpperCase() === "ROCK"){
-        return "You win! Paper beats Rock."
+        result.innerText = "You win! Paper beats Rock."
+        pwin ++;
+        player.innerText = "Player score: "+pwin;
+        computer.innerText = "Computer score: "+cwin;
     }
     else if (playerSelection.toUpperCase() === "SCISSOR" && computerSelection.toUpperCase() === "SCISSOR"){
-        return "It's a draw! You both picked Scissor.";
+        result.innerText = "It's a draw! You both picked Scissor.";
     }
     else if (playerSelection.toUpperCase() === "SCISSOR" && computerSelection.toUpperCase() === "PAPER"){
-        return "You win! Scissor beats Paper.";
+        result.innerText = "You win! Scissor beats Paper.";
+        pwin ++;
+        player.innerText = "Player score: "+pwin;
+        computer.innerText = "Computer score: "+cwin;
     }
     else if(playerSelection.toUpperCase() === "SCISSOR" && computerSelection.toUpperCase() === "ROCK"){
-        return "You lose! Rock beats Scissor";
+        result.innerText = "You lose! Rock beats Scissor";
+        cwin ++;
+        player.innerText = "Player score: "+pwin;
+        computer.innerText = "Computer score: "+cwin;
+    } 
+
+
+if (over === 0){
+    if (pwin === 5){
+        winner.innerText = "Congrats! You reached 5 points first!";
+        over ++;
+    }
+    else if(cwin === 5){
+        winner.innerText = "Pathetic! You lost! The computer reached five points first!"
+        over ++;
     }
 }
 
-const playerSelection = "rock";
-const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+}
 
+
+/*
 function game(){
     let win = 0; 
     let lose =0;
@@ -74,5 +113,18 @@ function game(){
         return"Pathetic! You lost! You won "+ win + " game(s), but lost "+lose+" game(s).";
     }
 }
+*/
 
+let rbtn = document.querySelector(".rock");
+let pbtn = document.querySelector(".paper");
+let sbtn = document.querySelector(".scissor");
 
+if(rbtn){
+rbtn.addEventListener("click", () => {playRound("rock", getComputerChoice())});
+}
+if (pbtn){
+pbtn.addEventListener("click", () => {playRound("paper", getComputerChoice())});
+}
+if (sbtn){
+sbtn.addEventListener("click", () => {playRound("scissor", getComputerChoice())});
+}
